@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Skyware</string>
+    <string name="name_nontact">Tên Danh Bạ</string>
+    <string name="number_phone_contact">091930190</string>
+    <string name="name_contact_sms">Tên liên hệ</string>
+    <string name="content_sms">nội dung tin nhắn</string>
+</resources>

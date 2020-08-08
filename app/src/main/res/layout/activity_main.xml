@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/b_activity_main_load_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#dff"
+        android:textStyle="italic"
+        android:background="@drawable/b_load_list_contact_custom"
+        android:text="load_contacts" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lv_activity_main_contact"
+        android:layout_width="match_parent"
+        android:layout_height="280dp" />
+
+    <Button
+        android:id="@+id/b_activity_main_load_sms"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/photo1"
+        android:text="load_Sms" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lv_activity_main_sms"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>

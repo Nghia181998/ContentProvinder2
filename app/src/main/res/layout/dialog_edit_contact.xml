@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:id="@+id/ll_dialog_edit_contact"
+    android:orientation="vertical"
+    android:gravity="center">
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:id="@+id/ed_dialog_edit_name_contac"
+        />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:id="@+id/ed_dialog_edit_phone_contac"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+       <Button
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:text="Sửa"
+           android:id="@+id/b_dialog_edit_contact_confirm"
+        />
+       <Button
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:text="Hủy"
+           android:id="@+id/b_dialog_edit_contact_cancel"
+        />
+    </LinearLayout>
+
+
+</LinearLayout>
