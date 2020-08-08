@@ -56,42 +56,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                new Contact().requestPermissionContact(MainActivity.this);
-
+                mLocationManager.removeUpdates(mLocationListener);
 //
 
             }
         });
 //        String bestProvider = String.valueOf(mLocationManager.getBestProvider(criteria, true)).toString();
 //        Toast.makeText(MainActivity.this,bestProvider,Toast.LENGTH_LONG).show();
-        mLocationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                //double speed = location.getSpeed(); //spe2d in meter/minute
-                //speed = (speed*3600)/1000;      // speed in km/minute
-                Toast.makeText(getApplicationContext(), "lat" + latitude + "lon" + longitude,Toast.LENGTH_SHORT).show();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission
+                            (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,},
+                        10);
+                return;
             }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
+        }
         bLoadSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new Contact().requestPermissionSms(MainActivity.this);
+                requestUpdate();
+
 //                xuly("Hagsd");
 //                contactAdapter = new ContactAdapter(MainActivity.this, myContacts);
 //                contactAdapter.notifyDataSetChanged();
@@ -124,16 +111,7 @@ public class MainActivity extends AppCompatActivity {
 //                lvListSms.setAdapter(smsAdapter);
 //            }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission
-                            (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION,},
-                        10);
-                return;
-            }
-        }
+
     }
 
 
@@ -158,9 +136,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void requestUpdate() {
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener);
-    }
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
 
+                Toast.makeText(getApplicationContext(), "lat" + latitude + "lon" + longitude,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        });
+    }
+    public void stopOnClick(){
+        mLocationManager.removeUpdates(mLocationListener);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             rvSms.setAdapter(mSmsAdapter);
         }
         else if (requestCode == 10 ){
-            requestUpdate();
+requestUpdate();
         }
 
     }
@@ -244,6 +247,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return -1;
+    }
+    public void getLocation(){
+
     }
 }
 
